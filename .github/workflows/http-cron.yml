@@ -12,8 +12,8 @@ jobs:
           --url 'https://data-sbox.synerio.com/api/authenticate' \
           --header 'Content-Type: application/json'
           --data '{
-              "accessKeyId": "K6bRTGQlAb8QPJnns0QLL",
-              "secret":  "0TxvzogCskEWTgAacN0MB4GdrbjtCT97eL5_0Aqt5AA7WouZlTKpzga6YezDp9lG"
+              "accessKeyId": "${{secrets.TEST1}}",
+              "secret":  "${{secrets.TEST2}}"
           }' | jq '.token' )
           echo "AUTH_TOKEN=$token" >> "$GITHUB_ENV"
           echo "$AUTH_TOKEN"
