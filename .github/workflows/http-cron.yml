@@ -10,10 +10,7 @@ jobs:
         run: |
           token=$(curl --request POST \
           --url 'https://data-sbox.synerio.com/api/authenticate' \
-          --header 'Content-Type: application/json'
-          --data '{
-              "accessKeyId": "${{secrets.TEST1}}",
-              "secret":  "${{secrets.TEST2}}"
-          }' | jq '.token' )
+          --header 'Content-Type: application/json' \
+          --data '{"accessKeyId": "${{secrets.TEST1}}","secret":  "${{secrets.TEST2}}"}' | jq '.token' )
           echo "AUTH_TOKEN=$token" >> "$GITHUB_ENV"
           echo "$AUTH_TOKEN"
