@@ -18,4 +18,4 @@ jobs:
       - name: Send request
         run: |
           curl --url https://data-sbox.synerio.com/api/jobs/run \
-          --header 'Authorization: Bearer $AUTH_TOKEN'
+          --header 'Authorization: Bearer "${{env.AUTH_TOKEN}}"'
