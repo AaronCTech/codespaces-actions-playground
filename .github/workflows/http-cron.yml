@@ -1,0 +1,19 @@
+name: Minute cron job
+on:
+  schedule:
+    - cron: '* * * * *'
+jobs:
+  cron:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Minute cron job
+        run: |
+          token=$(curl --request POST \
+          --url 'https://data-sbox.synerio.com/api/authenticate' \
+          --header 'Content-Type: application/json'
+          --data '{
+              "accessKeyId": "K6bRTGQlAb8QPJnns0QLL",
+              "secret":  "0TxvzogCskEWTgAacN0MB4GdrbjtCT97eL5_0Aqt5AA7WouZlTKpzga6YezDp9lG"
+          }' | jq '.token' )
+          echo "AUTH_TOKEN=$token" >> "$GITHUB_ENV"
+          echo "$AUTH_TOKEN"
