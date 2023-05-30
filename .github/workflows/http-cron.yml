@@ -18,3 +18,18 @@ jobs:
           echo "${{env.AUTH_TOKEN}}" | xxd -ps
           curl --url https://data-sbox.synerio.com/api/jobs/run \
           --header 'Authorization: Bearer ${{env.AUTH_TOKEN}}'
+  dev01:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get token
+        run: |
+          token=$(curl --request POST \
+          --url 'https://data-dev01.synerio.com/api/authenticate' \
+          --header 'Content-Type: application/json' \
+          --data '{"accessKeyId": "${{secrets.TEST3}}","secret":  "${{secrets.TEST4}}"}' | jq -r '.token' )
+          echo "AUTH_TOKEN=$token" >> "$GITHUB_ENV"
+      - name: Send request
+        run: |
+          echo "${{env.AUTH_TOKEN}}" | xxd -ps
+          curl --url https://data-dev01.synerio.com/api/jobs/run \
+          --header 'Authorization: Bearer ${{env.AUTH_TOKEN}}'
