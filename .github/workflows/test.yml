@@ -1,4 +1,4 @@
-name: Five minute cron job
+name: Test job
 on:
   push:
     branches:
@@ -13,8 +13,8 @@ jobs:
           --url 'https://data-sbox.synerio.com/api/authenticate' \
           --header 'Content-Type: application/json' \
           --data '{"accessKeyId": "${{secrets.TEST1}}","secret":  "${{secrets.TEST2}}"}' | jq '.token' )
+          echo "$token"
           echo "AUTH_TOKEN=$token" >> "$GITHUB_ENV"
-          echo "$AUTH_TOKEN" | sed 's/./& /g'
       - name: Send request
         run: |
           curl --url https://data-sbox.synerio.com/api/jobs/run \
