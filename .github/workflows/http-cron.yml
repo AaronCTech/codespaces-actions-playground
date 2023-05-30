@@ -1,4 +1,4 @@
-name: Minute cron job
+name: Five minute cron job
 on:
   schedule:
     - cron: '*/5 * * * *'
@@ -6,7 +6,7 @@ jobs:
   cron:
     runs-on: ubuntu-latest
     steps:
-      - name: Minute cron job
+      - name: Five minute cron job
         run: |
           token=$(curl --request POST \
           --url 'https://data-sbox.synerio.com/api/authenticate' \
