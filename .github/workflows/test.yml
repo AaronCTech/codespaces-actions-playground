@@ -1,0 +1,19 @@
+name: Five minute cron job
+on:
+  push:
+    branches:
+      - main
+jobs:
+  cron:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get token
+        run: |
+          curl --request POST \
+          --url 'https://data-sbox.synerio.com/api/authenticate' \
+          --header 'Content-Type: application/json' \
+          --data '{"accessKeyId": "${{secrets.TEST1}}","secret":  "${{secrets.TEST2}}"}'
+      - name: Send request
+        run: |
+          curl --url https://data-sbox.synerio.com/api/jobs/run \
+          --header 'Authorization: Bearer $AUTH_TOKEN'
