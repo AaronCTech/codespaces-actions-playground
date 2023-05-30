@@ -6,11 +6,13 @@ jobs:
   cron:
     runs-on: ubuntu-latest
     steps:
-      - name: Five minute cron job
+      - name: Get token
         run: |
           token=$(curl --request POST \
           --url 'https://data-sbox.synerio.com/api/authenticate' \
           --header 'Content-Type: application/json' \
           --data '{"accessKeyId": "${{secrets.TEST1}}","secret":  "${{secrets.TEST2}}"}' | jq '.token' )
           echo "AUTH_TOKEN=$token" >> "$GITHUB_ENV"
-          echo "$AUTH_TOKEN"
+      - name: Send request
+        run: |
+          curl --url https://data-sbox.synerio.com/api/jobs/run --header 'Authorization: Bearer $AUTH_TOKEN'
