@@ -1,7 +1,7 @@
 name: Cron job
 on:
   schedule:
-    - cron: '*/15 * * * *'
+    - cron: '*/5 * * * *'
 jobs:
   sbox:
     runs-on: ubuntu-latest
